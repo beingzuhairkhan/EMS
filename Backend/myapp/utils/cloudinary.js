@@ -1,0 +1,39 @@
+import { v2 as cloudinary } from "cloudinary";
+import dotenv from "dotenv";
+import streamifier from "streamifier";
+
+dotenv.config();
+
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+export const uploadOnCloudinary = (fileBuffer) => {
+  return new Promise((resolve, reject) => {
+    const stream = cloudinary.uploader.upload_stream(
+      { folder: "employees" }, // ✅ Save images in "employees" folder
+      (error, result) => {
+        if (error) {
+          console.error("Cloudinary Upload Error:", error);
+          return reject(new Error("Image upload failed"));
+        }
+        resolve(result.secure_url); // ✅ Return Cloudinary URL
+      }
+    );
+
+    streamifier.createReadStream(fileBuffer).pipe(stream); // ✅ Convert buffer to stream
+  });
+};
+
+
+export const deleteFromCloudinary = async (publicId) => {
+    try {
+      await cloudinary.uploader.destroy(publicId);
+        console.log("Previous image deleted successfully.");
+    } catch (error) {
+        console.error("Error deleting image from Cloudinary:", error);
+    }
+};
