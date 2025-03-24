@@ -1,9 +1,9 @@
 import axios from "axios";
-
+const API_BASE_URL = import.meta.env.VITE_PUBLIC_URL;
 const token = localStorage.getItem("token");
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:8888/api/v1",
+  baseURL: `${API_BASE_URL}`,
   headers: {
     Authorization: `Bearer ${token}`,
   },

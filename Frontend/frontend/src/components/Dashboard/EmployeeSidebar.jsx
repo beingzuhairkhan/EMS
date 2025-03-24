@@ -41,6 +41,7 @@ const EmployeeSidebar = () => {
             { to: `/employee/profile/${user?._id}`, icon: FiUser, label: "My Profile" },
             { to: "/employee/leaves", icon: FiCalendar, label: "Leaves" },
             { to: `/employee/salary/${user?._id}`, icon: FiDollarSign, label: "Salary" },
+            // { to: `/employee/attendance/${user?._id}`, icon: FiLock, label: "Attendance" },
             { to: "/employee/change-password", icon: FiLock, label: "Change Password" }
           ].map(({ to, icon: Icon, label }) => (
             <NavLink

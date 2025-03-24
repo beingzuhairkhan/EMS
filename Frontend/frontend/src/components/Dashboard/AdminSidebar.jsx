@@ -32,6 +32,9 @@ const AdminSidebar = () => {
             { to: "/admin/departments", icon: FiBriefcase, label: "Departments" },
             { to: "/admin/leaves", icon: FiCalendar, label: "Leaves" },
             { to: "/admin/salary", icon: FiDollarSign, label: "Salary" },
+            { to: "/admin/attendance", icon: FiDollarSign, label: "Attendance" },
+            { to: "/admin/attendance-report", icon: FiDollarSign, label: "Attendance Report" },
+         
           ].map(({ to, icon: Icon, label }) => (
             <NavLink
               key={to}

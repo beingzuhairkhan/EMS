@@ -1,9 +1,8 @@
 import { useState } from "react";
-import axios from 'axios'
 import { Link } from "react-router-dom";
 import toast from 'react-hot-toast';
 import {useNavigate} from 'react-router-dom'
-const API_BASE_URL = import.meta.env.VITE_PUBLIC_URL;
+import axiosInstance from '../context/axiosInstance.js'
 const Register = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -12,7 +11,7 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try{
-             await axios.post(`${API_BASE_URL}user/register`,{
+             await axiosInstance.post(`user/register`,{
                 name,email,password
             })
             // const data = await response.json();

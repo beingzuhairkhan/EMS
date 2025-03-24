@@ -12,6 +12,7 @@ import employeeRoutes from './routes/employeeRoutes.js'
 import salaryRoutes from './routes/salaryRoutes.js'
 import leaveRoutes from './routes/leaveRoutes.js'
 import adminDashboard from './routes/dashboardRoutes.js'
+import attendanceRoutes from './routes/attendanceRoute.js'
 export const envMode = process.env.NODE_ENV?.trim() || 'DEVELOPMENT';
 const port = process.env.PORT || 5000;
 const app = express();
@@ -41,6 +42,7 @@ app.use('/api/v1/employee', employeeRoutes);
 app.use('/api/v1/salary', salaryRoutes);
 app.use('/api/v1/leave', leaveRoutes);
 app.use('/api/v1/admin/dashboard', adminDashboard);
+app.use("/api/v1/attendance", attendanceRoutes);
 app.get("*", (req, res) => {
   res.status(404).json({
     success: false,

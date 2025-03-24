@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import axios from 'axios';
 import { useAuth } from '../context/authContext'
 import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast';
-const API_BASE_URL = import.meta.env.VITE_PUBLIC_URL;
+import axiosInstance from '../context/axiosInstance.js'
 
 
 const Login = () => {
@@ -16,7 +15,7 @@ const Login = () => {
 
         e.preventDefault();
         try {
-            const response = await axios.post(`${API_BASE_URL}user/login`, {
+            const response = await axiosInstance.post(`user/login`, {
                 email,
                 password
             });

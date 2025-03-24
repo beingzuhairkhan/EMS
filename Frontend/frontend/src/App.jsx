@@ -17,7 +17,8 @@ import Leave from '../src/components/leave/Leave';
 import Password from '../src/components/password/Password';
 import AdminLeave from '../src/components/adminLeave/Leave';
 import Hero from '../src/components/Hero';
-
+import Attendance from '../src/components/attendance/Attendance'
+import AttendanceReport from '../src/components/attendance/AttendanceReport'
 function App() {
   return (
     <>
@@ -28,7 +29,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
 
-        {/* ✅ Admin Protected Routes */}
+  
         <Route element={<RoleBaseRoute requiredRole={["admin"]} />}>
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
           <Route path="/admin/employees" element={<Employee />} />
@@ -37,9 +38,11 @@ function App() {
           <Route path="/admin/departments/employee/:id" element={<ViewEmployee />} />
           <Route path="/admin/salary" element={<Salary />} />
           <Route path="/admin/employee/salary/:id" element={<SalaryById />} />
+          <Route path="/admin/attendance" element={<Attendance />} />
+          <Route path="/admin/attendance-report" element={<AttendanceReport />} />
         </Route>
 
-        {/* ✅ Employee Protected Routes */}
+   
         <Route element={<ProtectedRoute />}>
           <Route path="/employee-dashboard" element={<EmployeeDashboard />} />
           <Route path="/employee/profile/:id" element={<Profile />} />
@@ -48,7 +51,7 @@ function App() {
           <Route path="/employee/change-password" element={<Password />} />
         </Route>
 
-        {/* Unauthorized Page */}
+      
         <Route path="/unauthorized" element={<h1>403 - Unauthorized</h1>} />
       </Routes>
     </>

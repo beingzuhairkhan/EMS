@@ -12,7 +12,6 @@ export const applyLeave = asyncHandler(async (req, res) => {
             return res.status(400).json({ message: "Please provide all required fields" });
         }
 
-    
         const employee = await Employee.findOne({ userId : employeeId });
         if (!employee) {
             return res.status(404).json({ message: "Employee not found for this user" });
@@ -28,7 +27,7 @@ export const applyLeave = asyncHandler(async (req, res) => {
 
   
         const existingLeave = await Leave.findOne({
-            employeeId: employee._id, // ✅ Use employee `_id`
+            employeeId: employee._id, 
             leaveType,
             startDate: { $lte: new Date(endDate) },
             endDate: { $gte: new Date(startDate) },
@@ -68,14 +67,12 @@ export const getLeaveById = asyncHandler(async (req, res) => {
     try {
         const { id } = req.params;
 
-        // ✅ Find Employee by userId
         const employee = await Employee.findOne({ userId: id });
 
         if (!employee) {
             return res.status(404).json({ message: "Employee not found for this user" });
         }
 
-        // ✅ Find Leaves using employee._id (not _id of Leave)
         const leaves = await Leave.find({ employeeId: employee._id });
 
         if (!leaves.length) {

@@ -5,14 +5,12 @@ import { asyncHandler } from '../utils/asyncHandler.js';
 export const addDepartment = asyncHandler(async (req, res) => {
     try {
         const { name, description } = req.body;
-        
-        // Check if department already exists
+
         const existedDepartment = await Department.findOne({ name });
         if (existedDepartment) {
             return res.status(400).json({ message: "Department already exists" });
         }
 
-        // Create new department
         const newDepartment = await Department.create({ name, description });
         res.status(201).json({ message: "Department created successfully", department: newDepartment });
 
@@ -60,13 +58,11 @@ export const editDepartmentById = asyncHandler(async (req, res) => {
         const { id } = req.params;
         const { name, description } = req.body;
 
-        // Check if department exists
         const findDepartment = await Department.findById(id);
         if (!findDepartment) {
             return res.status(404).json({ message: "Department not found" });
         }
 
-        // Update department
         const updatedDepartment = await Department.findByIdAndUpdate(
             id,
             { name, description },
@@ -89,14 +85,12 @@ export const deleteDepartmentById = asyncHandler(async (req, res) => {
     try {
         const { id } = req.params;
 
-        // Check if department exists
         const findDepartment = await Department.findById(id);
         if (!findDepartment) {
             return res.status(404).json({ message: "Department not found" });
         }
         await findDepartment.deleteOne()
 
-        // Delete department
        // await Department.findByIdAndDelete(id);
 
         res.status(200).json({ message: "Department deleted successfully" });

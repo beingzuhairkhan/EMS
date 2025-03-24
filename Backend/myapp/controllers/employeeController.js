@@ -12,20 +12,19 @@ export const addEmployee = asyncHandler(async (req, res) => {
             return res.status(400).json({ message: "Please provide all fields" });
         }
 
-        // ✅ Find department by name and get ObjectId
         const departmentData = await Department.findOne({ name: department });
         if (!departmentData) {
             return res.status(400).json({ message: "Invalid department name" });
         }
-        const departmentId = departmentData._id; // ✅ Convert to ObjectId
+        const departmentId = departmentData._id; 
 
-        // ✅ Check if Email Exists
+
         const existingUser = await User.findOne({ email });
         if (existingUser) {
             return res.status(400).json({ message: "Email already exists" });
         }
 
-        // ✅ Upload Image to Cloudinary
+
         let imageUrl = "";
         if (req.file) {
             console.log("Uploading image to Cloudinary...");
@@ -34,18 +33,18 @@ export const addEmployee = asyncHandler(async (req, res) => {
             console.warn("No image file provided.");
         }
 
-        // ✅ Create User
+
         const newUser = new User({
             name,
             email,
             password,
             role,
-            image: imageUrl, // ✅ Store Cloudinary URL
+            image: imageUrl,
         });
 
         const savedUser = await newUser.save();
 
-        // ✅ Create Employee Record
+
         const newEmployee = await Employee.create({
             userId: savedUser._id,
             employeeId,
@@ -53,7 +52,7 @@ export const addEmployee = asyncHandler(async (req, res) => {
             gender,
             maritalStatus,
             designation,
-            department: departmentId, // ✅ Use ObjectId instead of string
+            department: departmentId,
             salary,
         });
 
@@ -79,7 +78,7 @@ export const getAllEmployees = asyncHandler(async (req, res) => {
     }
 });
 
-//fetchEmployeeById
+
 
 export const getEmployeeBydId = asyncHandler(async (req, res) => {
     try {
@@ -125,17 +124,16 @@ export const editEmployeeById = asyncHandler(async (req, res) => {
         const { id } = req.params;
         let { name, employeeId, dob, gender, maritalStatus, designation, department, salary, role } = req.body;
 
-        // ✅ Validate Employee ID
+        
         if (!mongoose.Types.ObjectId.isValid(id)) {
             return res.status(400).json({ message: "Invalid Employee ID" });
         }
 
-        // ✅ Convert department to ObjectId if necessary
         if (department && !mongoose.Types.ObjectId.isValid(department)) {
             return res.status(400).json({ message: "Invalid Department ID" });
         }
 
-        // ✅ Find Employee and Associated User
+
         const employee = await Employee.findById(id);
         if (!employee) {
             return res.status(404).json({ message: "Employee not found" });
@@ -146,9 +144,8 @@ export const editEmployeeById = asyncHandler(async (req, res) => {
             return res.status(404).json({ message: "User not found" });
         }
 
-        let imageUrl = user.image; // Retain existing image
+        let imageUrl = user.image; 
 
-        // ✅ Handle Image Upload if New File is Provided
         if (req.file) {
             if (user.image) {
                 try {
@@ -160,8 +157,7 @@ export const editEmployeeById = asyncHandler(async (req, res) => {
             }
             imageUrl = await uploadOnCloudinary(req.file.buffer);
         }
-
-        // ✅ Update Employee & User Records Concurrently
+ly
         await Promise.all([
             Employee.updateOne({ _id: id }, { 
                 employeeId, 
@@ -175,7 +171,6 @@ export const editEmployeeById = asyncHandler(async (req, res) => {
             User.updateOne({ _id: employee.userId }, { name, role, image: imageUrl })
         ]);
 
-        // ✅ Fetch updated records
         const updatedEmployee = await Employee.findById(id);
         const updatedUser = await User.findById(employee.userId);
 
@@ -187,9 +182,6 @@ export const editEmployeeById = asyncHandler(async (req, res) => {
     }
 });
 
-
-
-//findByIdANdDelete
 
 export const employeeDeleteById = asyncHandler(async(req,res)=>{
     try{

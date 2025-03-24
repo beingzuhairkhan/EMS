@@ -6,11 +6,13 @@ const Navbar = () => {
 
 
   return (
-    <nav className="bg-black text-white p-4 flex justify-between items-center shadow-md fixed top-0 left-0 w-full z-50">
+    <nav className="bg-black text-white p-4 flex justify-between pl-4  items-center shadow-md fixed top-0 left-0 w-full z-50">
       {/* ✅ Left Side - Project Name */}
       <Link to="/" className="text-2xl font-bold">
-        <h1 className="text-2xl font-bold tracking-wide text-white">WorkSync Pro</h1>
-      </Link>
+  <h1 className="text-2xl font-bold italic tracking-wide text-white">
+    WorkSync Pro
+  </h1>
+</Link>
 
       {/* ✅ Center - Welcome Message (Only if logged in) */}
       {user && (
