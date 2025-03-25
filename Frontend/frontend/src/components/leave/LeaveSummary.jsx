@@ -4,9 +4,9 @@ import axiosInstance from "../../../src/context/axiosInstance";
 import { useAuth } from "../../../src/context/authContext";
 
 const LeaveSummary = () => {
-  const { user } = useAuth(); // ✅ Get logged-in user data
-  const [leaves, setLeaves] = useState([]); // ✅ Store all leaves
-  const [isModalOpen, setIsModalOpen] = useState(false); // ✅ Modal state
+  const { user } = useAuth(); 
+  const [leaves, setLeaves] = useState([]); 
+  const [isModalOpen, setIsModalOpen] = useState(false); 
   const [formData, setFormData] = useState({
     leaveType: "",
     fromDate: "",
@@ -18,7 +18,7 @@ const LeaveSummary = () => {
     fetchLeaves();
   }, []);
 
-  // ✅ Fetch all leave records for the logged-in employee
+
   const fetchLeaves = async () => {
     if (!user?._id) {
         console.error("User ID is undefined. Cannot fetch leaves.");
@@ -27,7 +27,7 @@ const LeaveSummary = () => {
     }
 
     try {
-        console.log("Fetching leaves for user ID:", user._id); // ✅ Debugging log
+        console.log("Fetching leaves for user ID:", user._id); 
         const response = await axiosInstance.get(`/leave/${user._id}`);
         setLeaves(response.data.leaves || []);
     } catch (error) {
@@ -37,12 +37,10 @@ const LeaveSummary = () => {
 };
 
 
-  // ✅ Handle input change
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // ✅ Handle form submission with validation
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -69,10 +67,10 @@ const LeaveSummary = () => {
       const response = await axiosInstance.post("/leave/apply", leaveData);
       toast.success(response.data.message || "Leave applied successfully");
 
-      // ✅ Refresh leave records after adding new leave
+   
       fetchLeaves();
 
-      // ✅ Reset form and close modal
+     
       setFormData({ leaveType: "", fromDate: "", toDate: "", description: "" });
       setIsModalOpen(false);
     } catch (error) {
@@ -85,7 +83,7 @@ const LeaveSummary = () => {
     <div className="max-w-7xl mx-auto   rounded-lg">
       <h2 className="text-2xl font-semibold mb-4 text-gray-800">Leave Summary</h2>
 
-      {/* ✅ Add New Leave Button */}
+      
       <button
         onClick={() => setIsModalOpen(true)}
         className="mb-4 bg-blue-500  text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition shadow-md"
@@ -93,7 +91,7 @@ const LeaveSummary = () => {
         + Add New Leave
       </button>
 
-      {/* ✅ Leave Table */}
+    
       <div className="overflow-x-auto">
         <table className="min-w-full border border-gray-300 rounded-lg">
           <thead>
@@ -139,14 +137,14 @@ const LeaveSummary = () => {
         </table>
       </div>
 
-      {/* ✅ Modal for Adding New Leave */}
+      
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-1/3">
             <h2 className="text-xl font-semibold mb-4">Apply for Leave</h2>
 
             <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4">
-              {/* Leave Type Dropdown */}
+             
               <div className="flex flex-col">
                 <label className="text-gray-600 font-medium mb-1">Leave Type</label>
                 <select
@@ -163,7 +161,7 @@ const LeaveSummary = () => {
                 </select>
               </div>
 
-              {/* From Date */}
+              
               <div className="flex flex-col">
                 <label className="text-gray-600 font-medium mb-1">From Date</label>
                 <input
@@ -176,7 +174,7 @@ const LeaveSummary = () => {
                 />
               </div>
 
-              {/* To Date */}
+             
               <div className="flex flex-col">
                 <label className="text-gray-600 font-medium mb-1">To Date</label>
                 <input
@@ -189,7 +187,7 @@ const LeaveSummary = () => {
                 />
               </div>
 
-              {/* Description */}
+          
               <div className="flex flex-col">
                 <label className="text-gray-600 font-medium mb-1">Description</label>
                 <textarea
@@ -202,7 +200,7 @@ const LeaveSummary = () => {
                 ></textarea>
               </div>
 
-              {/* Buttons */}
+           
               <div className="flex justify-between">
                 <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
                   Submit

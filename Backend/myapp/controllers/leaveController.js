@@ -95,7 +95,7 @@ export const getAllLeaves = asyncHandler(async (req, res) => {
             .populate({
                 path: "employeeId",
                 select: "name employeeId department",
-                populate: { path: "department", select: "name" }, // ✅ Populate department inside employee
+                populate: { path: "department", select: "name" }, 
             });
 
         if (!leaves.length) {
@@ -117,7 +117,7 @@ export const getAllLeaves = asyncHandler(async (req, res) => {
 export const updateLeaveStatus = asyncHandler(async (req, res) => {
     try {
         const { id } = req.params;
-        const { status } = req.body; // ✅ Extract from body, not params
+        const { status } = req.body;
 
         // ✅ Find leave by ID
         const leave = await Leave.findById(id);
@@ -125,17 +125,16 @@ export const updateLeaveStatus = asyncHandler(async (req, res) => {
             return res.status(404).json({ message: "Leave not found" });
         }
 
-        // ✅ Validate status
+      
         const validStatuses = ["Pending", "Approved", "Rejected"];
         if (!validStatuses.includes(status)) {
             return res.status(400).json({ message: "Invalid status" });
         }
 
-        // ✅ Update leave status
+    
         leave.Status = status;
         await leave.save();
 
-        // ✅ Fetch employee and user if leave is Approved/Rejected
         let user;
         if (status === "Approved" || status === "Rejected") {
             const employee = await Employee.findById(leave.employeeId);

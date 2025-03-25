@@ -14,7 +14,7 @@ const LeaveSearch = () => {
 
   const fetchLeaves = async () => {
     try {
-      const response = await axiosInstance.get("/leave"); // ✅ Ensure correct API route
+      const response = await axiosInstance.get("/leave");
       console.log("Leaves Data:", response.data);
       setLeaves(response.data?.leaves || []);
     } catch (error) {
@@ -34,7 +34,6 @@ const LeaveSearch = () => {
     }
   };
 
-  // ✅ Ensure employeeId exists before accessing `name`
   const filteredLeaves = leaves.filter((leave) => {
     const employeeName = leave?.employeeId?.employeeId?.toLowerCase() || ""; 
     const matchesSearch = employeeName.includes(searchQuery.toLowerCase());
@@ -48,7 +47,7 @@ const LeaveSearch = () => {
     <div className="p-6 rounded-lg bg-white shadow-md">
       <h2 className="text-2xl font-semibold mb-4">Search & Filter Leaves</h2>
       <div className="flex flex-wrap gap-4 mb-4">
-        {/* ✅ Search Input */}
+    
         <input
           type="text"
           placeholder="Search by Employee Name"
@@ -56,8 +55,7 @@ const LeaveSearch = () => {
           onChange={(e) => setSearchQuery(e.target.value)}
           className="p-2 border border-gray-300 rounded-lg w-full md:w-1/3 focus:ring-2 focus:ring-blue-400"
         />
-        
-        {/* ✅ Status Filter */}
+    
         <select
           value={filterStatus}
           onChange={(e) => setFilterStatus(e.target.value)}
@@ -70,7 +68,7 @@ const LeaveSearch = () => {
         </select>
       </div>
 
-      {/* ✅ Pass filtered data to table */}
+     
       <LeaveTable leaves={filteredLeaves} onUpdateStatus={updateLeaveStatus} />
     </div>
   );

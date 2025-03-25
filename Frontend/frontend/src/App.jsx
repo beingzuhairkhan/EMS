@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { useAuth } from "../src/context/authContext"; // ✅ Import Auth Context
+import { useAuth } from "../src/context/authContext"; 
 import Login from "../src/pages/Login";
 import Register from "../src/pages/Register";
 import AdminDashboard from "../src/pages/Admin-Dashboard";
@@ -24,7 +24,7 @@ function App() {
     <>
       <Navbar />
       <Routes>
-        {/* Public Routes */}
+       
         <Route path="/" element={<Hero />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />

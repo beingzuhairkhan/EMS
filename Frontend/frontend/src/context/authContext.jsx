@@ -30,7 +30,7 @@ const AuthContextProvider = ({ children }) => {
             } catch (error) {
                 console.error("User verification failed:", error);
                 
-                // ✅ Retry once before logging out
+            
                 if (error.response?.status === 401) {
                     logOut();
                 }
@@ -42,20 +42,19 @@ const AuthContextProvider = ({ children }) => {
         verifyUser();
     }, []);
 
-    // ✅ Login function
+
     const login = (user, token) => {
         setUser(user);
-        localStorage.setItem("token", token); // ✅ Store token on login
+        localStorage.setItem("token", token); 
     };
 
-    // ✅ Logout function
+ 
     const logOut = () => {
         setUser(null);
         localStorage.removeItem("token");
-        navigate('/login'); // ✅ Redirect after logout
+        navigate('/login'); 
     };
 
-    // ✅ Prevent navigation until loading is complete
     if (loading) return <div>Loading...</div>;
 
     return (
@@ -65,7 +64,6 @@ const AuthContextProvider = ({ children }) => {
     );
 };
 
-// ✅ Correct Export for useAuth
 export const useAuth = () => useContext(UserContext);
 
 export default AuthContextProvider;

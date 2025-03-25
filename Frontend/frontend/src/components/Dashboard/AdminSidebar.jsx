@@ -1,15 +1,15 @@
 import { NavLink } from "react-router-dom";
 import { FiHome, FiUsers, FiBriefcase, FiCalendar, FiDollarSign, FiLogOut, FiMenu } from "react-icons/fi";
 import { useState } from "react";
-import { useAuth } from "../../context/authContext"; // ✅ Import useAuth
+import { useAuth } from "../../context/authContext"; 
 
 const AdminSidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
-  const { logOut } = useAuth(); // ✅ Get logOut function from context
+  const { logOut } = useAuth(); 
 
   return (
     <>
-      {/* Toggle Button for Mobile */}
+      
       <button
         className="md:hidden fixed top-4 left-4 z-50 mt-10 bg-black text-white p-2 rounded-md"
         onClick={() => setIsOpen(!isOpen)}
@@ -17,7 +17,7 @@ const AdminSidebar = () => {
         <FiMenu size={24} />
       </button>
 
-      {/* Sidebar */}
+     
       <div
         className={`fixed top-0 left-0 h-screen w-64 bg-black text-white p-5 shadow-lg transition-transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
@@ -50,9 +50,9 @@ const AdminSidebar = () => {
             </NavLink>
           ))}
 
-          {/* ✅ Logout Button */}
+         
           <button
-            onClick={logOut} // ✅ Logout when clicked
+            onClick={logOut}
             className="flex items-center px-4 py-2 w-full rounded-md transition cursor-pointer bg-black hover:bg-white hover:text-black mt-4"
           >
             <FiLogOut className="mr-3 text-xl" />

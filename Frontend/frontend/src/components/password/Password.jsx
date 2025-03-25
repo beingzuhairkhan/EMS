@@ -11,7 +11,7 @@ const Password = () => {
         <EmployeeSidebar />
       </div>
 
-      {/* ✅ Main Content */}
+      {/*  Main Content */}
       <div className="flex-1 ml-64 p-8">
 
       <ChangePassword/>

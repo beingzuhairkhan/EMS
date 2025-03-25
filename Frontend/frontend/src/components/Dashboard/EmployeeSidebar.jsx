@@ -9,15 +9,15 @@ import {
   FiLock
 } from "react-icons/fi";
 import { useState } from "react";
-import { useAuth } from "../../context/authContext"; // ✅ Import useAuth
+import { useAuth } from "../../context/authContext"; 
 
 const EmployeeSidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
-  const { user, logOut } = useAuth(); // ✅ Get logOut function from context
+  const { user, logOut } = useAuth();
 
   return (
     <>
-      {/* ✅ Toggle Button for Mobile */}
+    
       <button
         className="md:hidden fixed top-4 left-4 z-50 bg-black text-white p-2 rounded-md shadow-md"
         onClick={() => setIsOpen(!isOpen)}
@@ -25,7 +25,7 @@ const EmployeeSidebar = () => {
         <FiMenu size={24} />
       </button>
 
-      {/* ✅ Sidebar */}
+     
       <div
         className={`fixed top-0 left-0 h-screen w-64 bg-black text-white p-5 shadow-lg transition-transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
@@ -41,7 +41,7 @@ const EmployeeSidebar = () => {
             { to: `/employee/profile/${user?._id}`, icon: FiUser, label: "My Profile" },
             { to: "/employee/leaves", icon: FiCalendar, label: "Leaves" },
             { to: `/employee/salary/${user?._id}`, icon: FiDollarSign, label: "Salary" },
-            // { to: `/employee/attendance/${user?._id}`, icon: FiLock, label: "Attendance" },
+        
             { to: "/employee/change-password", icon: FiLock, label: "Change Password" }
           ].map(({ to, icon: Icon, label }) => (
             <NavLink
@@ -60,9 +60,9 @@ const EmployeeSidebar = () => {
             </NavLink>
           ))}
 
-          {/* ✅ Logout Button */}
+         
           <button
-            onClick={logOut} // ✅ Logout when clicked
+            onClick={logOut} 
             className="flex items-center px-4 py-2 w-full rounded-md transition bg-black hover:bg-white hover:text-black mt-6"
           >
             <FiLogOut className="mr-3 text-xl" />

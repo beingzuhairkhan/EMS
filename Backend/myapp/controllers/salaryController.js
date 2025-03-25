@@ -2,29 +2,27 @@ import Salary from '../models/salaryModel.js';
 import Employee from '../models/employeeModel.js';
 import { asyncHandler } from '../utils/asyncHandler.js';
 
-// ✅ Add Salary
+
 export const addSalary = asyncHandler(async (req, res) => {
   try {
-    const { employeeId } = req.params; // Extract employeeId from URL params
+    const { employeeId } = req.params; 
     const { basicSalary, allowances, deductions, payDate } = req.body;
 
     if (!basicSalary || !payDate) {
       return res.status(400).json({ message: "Please provide all required fields." });
     }
 
-    // ✅ Check if Employee Exists
     const employee = await Employee.findById(employeeId);
     if (!employee) {
       return res.status(404).json({ message: "Employee not found." });
     }
 
-    // ✅ Convert fields to numbers before calculation
+ 
     const basic = Number(basicSalary);
     const allow = Number(allowances) || 0;
     const deduct = Number(deductions) || 0;
     const netSalary = basic + allow - deduct;
 
-    // ✅ Create new salary record
     const newSalary = await Salary.create({
       employeeId,
       basicSalary: basic,
@@ -41,7 +39,6 @@ export const addSalary = asyncHandler(async (req, res) => {
   }
 });
 
-// ✅ Get All Salaries
 export const getAllSalaries = asyncHandler(async (req, res) => {
   try {
     const salaries = await Salary.find().populate('employeeId', 'userId employeeId').sort({ createdAt: -1 });
@@ -52,7 +49,6 @@ export const getAllSalaries = asyncHandler(async (req, res) => {
   }
 });
 
-// ✅ Get Salary by Employee ID
 export const getSalaryByEmployeeId = asyncHandler(async (req, res) => {
   try {
      const { employeeId } = req.params;
@@ -87,26 +83,26 @@ export const getSalaryByEmployeeId = asyncHandler(async (req, res) => {
   }
 });
 
-// ✅ Update Salary
+
 export const updateSalary = asyncHandler(async (req, res) => {
   try {
     const { salaryId } = req.params;
     const { basicSalary, allowances, deductions, payDate } = req.body;
 
-    // ✅ Find Salary Record
+   
     const salary = await Salary.findById(salaryId);
     if (!salary) {
       return res.status(404).json({ message: "Salary record not found." });
     }
 
-    // ✅ Update Fields
+  
     salary.basicSalary = Number(basicSalary);
     salary.allowances = Number(allowances) || 0;
     salary.deductions = Number(deductions) || 0;
     salary.payDate = payDate;
     salary.netSalary = salary.basicSalary + salary.allowances - salary.deductions;
 
-    // ✅ Save Updated Salary
+    
     await salary.save();
 
     res.status(200).json({ message: "Salary updated successfully", salary });
@@ -116,18 +112,18 @@ export const updateSalary = asyncHandler(async (req, res) => {
   }
 });
 
-// ✅ Delete Salary
+
 export const deleteSalary = asyncHandler(async (req, res) => {
   try {
     const { salaryId } = req.params;
 
-    // ✅ Find Salary Record
+   
     const salary = await Salary.findById(salaryId);
     if (!salary) {
       return res.status(404).json({ message: "Salary record not found." });
     }
 
-    // ✅ Delete Salary
+   
     await salary.deleteOne();
 
     res.status(200).json({ message: "Salary deleted successfully" });

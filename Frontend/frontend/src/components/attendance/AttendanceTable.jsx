@@ -4,19 +4,19 @@ import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 const AttendanceTable = () => {
-  const [date, setDate] = useState(new Date().toISOString().split("T")[0]); // Dynamic Date
+  const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
   const [searchQuery, setSearchQuery] = useState("");
   const [employees, setEmployees] = useState([]);
   const [attendance, setAttendance] = useState({});
   const [submitted, setSubmitted] = useState(false);
 
-  // ✅ Fetch employees & restore saved attendance
+  
   useEffect(() => {
     fetchEmployees();
     loadAttendance();
   }, []);
 
-  // ✅ Fetch employees
+
   const fetchEmployees = async () => {
     try {
       const response = await axiosInstance.get("/employee/getAllEmployees");
@@ -27,7 +27,6 @@ const AttendanceTable = () => {
     }
   };
 
-  // ✅ Restore saved attendance from Local Storage
   const loadAttendance = () => {
     const savedData = JSON.parse(localStorage.getItem("attendanceData")) || {};
     if (savedData.date === date) {
@@ -36,7 +35,7 @@ const AttendanceTable = () => {
     }
   };
 
-  // ✅ Handle attendance selection
+
   const handleAttendanceChange = (empId, status) => {
     if (!submitted) {
       setAttendance((prev) => {
@@ -47,7 +46,7 @@ const AttendanceTable = () => {
     }
   };
 
-  // ✅ Save attendance to Local Storage
+
   const saveAttendance = (attendanceData) => {
     localStorage.setItem(
       "attendanceData",
@@ -55,7 +54,7 @@ const AttendanceTable = () => {
     );
   };
 
-  // ✅ Submit Attendance
+
   const submitAttendance = async () => {
     try {
       const payload = employees.map((emp) => ({
@@ -68,21 +67,21 @@ const AttendanceTable = () => {
       toast.success("Attendance marked successfully!");
 
       setSubmitted(true);
-      saveAttendance(attendance); // ✅ Save state after submission
+      saveAttendance(attendance); 
     } catch (error) {
       console.error("Error marking attendance:", error);
       toast.error("Failed to mark attendance.");
     }
   };
 
-  // ✅ Filter employees by Employee ID search
+
   const filteredEmployees = employees.filter((emp) =>
     emp.employeeId.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
     <div className="p-6 rounded-lg ">
-      {/* 🔹 Top Row - Mark Attendance with Date */}
+     
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-semibold">Mark Attendance</h2>
         <input
@@ -94,7 +93,7 @@ const AttendanceTable = () => {
         />
       </div>
 
-      {/* 🔹 Second Row - Search & Attendance Report Button */}
+    
       <div className="flex justify-between items-center mb-4">
         <input
           type="text"
@@ -111,7 +110,7 @@ const AttendanceTable = () => {
         </Link>
       </div>
 
-      {/* 🔹 Third Row - Attendance Table */}
+     
       <div className="overflow-x-auto rounded-t-lg">
         <table className="w-full border-collapse border border-gray-300">
           <thead>
@@ -150,7 +149,7 @@ const AttendanceTable = () => {
         </table>
       </div>
 
-      {/* 🔹 Submit Attendance Button */}
+ 
       <div className="mt-6 text-right">
         <button
           onClick={submitAttendance}

@@ -14,17 +14,17 @@ cloudinary.config({
 export const uploadOnCloudinary = (fileBuffer) => {
   return new Promise((resolve, reject) => {
     const stream = cloudinary.uploader.upload_stream(
-      { folder: "employees" }, // ✅ Save images in "employees" folder
+      { folder: "employees" },
       (error, result) => {
         if (error) {
           console.error("Cloudinary Upload Error:", error);
           return reject(new Error("Image upload failed"));
         }
-        resolve(result.secure_url); // ✅ Return Cloudinary URL
+        resolve(result.secure_url); 
       }
     );
 
-    streamifier.createReadStream(fileBuffer).pipe(stream); // ✅ Convert buffer to stream
+    streamifier.createReadStream(fileBuffer).pipe(stream); 
   });
 };
 

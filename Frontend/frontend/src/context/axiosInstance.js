@@ -7,7 +7,7 @@ const axiosInstance = axios.create({
   headers: {
     Authorization: `Bearer ${token}`,
   },
-  withCredentials: true, // Required for cookies
+  withCredentials: true, 
 });
 
 export default axiosInstance;

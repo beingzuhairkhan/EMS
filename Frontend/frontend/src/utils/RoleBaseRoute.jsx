@@ -1,15 +1,15 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { useAuth } from "../context/authContext"; // ✅ Import Auth Context
+import { useAuth } from "../context/authContext"; 
 
 const RoleBaseRoute = ({ requiredRole }) => {
-  const { user } = useAuth(); // ✅ Get user data
+  const { user } = useAuth(); 
 
   if (!user) {
-    return <Navigate to="/login" replace />; // Redirect to login if not authenticated
+    return <Navigate to="/login" replace />;
   }
 
   if (!requiredRole.includes(user.role)) {
-    return <Navigate to="/unauthorized" replace />; // Redirect if the role is unauthorized
+    return <Navigate to="/unauthorized" replace />; 
   }
 
   return <Outlet />;

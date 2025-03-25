@@ -29,7 +29,7 @@ const AdminSummary = () => {
 
   return (
     <div className="p-6 overflow-y-auto">
-      {/* Dashboard Overview */}
+    
       <center>
         <h1 className="text-2xl font-bold mb-6 font-sans text-black">Dashboard Overview</h1>
       </center>
@@ -50,7 +50,7 @@ const AdminSummary = () => {
         ))}
       </div>
 
-      {/* Leave Details */}
+    
       <center>
         <h1 className="text-2xl font-bold mt-4 mb-6 font-sans text-black">Leave Details</h1>
       </center>
@@ -70,7 +70,7 @@ const AdminSummary = () => {
         ))}
       </div>
 
-      {/* Leave Pending & Rejected */}
+     
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {[
           { title: "Leave Pending", value: summary?.leaveSummary.pending },

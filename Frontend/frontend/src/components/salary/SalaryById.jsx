@@ -28,7 +28,7 @@ const SalaryById = () => {
       <div className="flex justify-between" >
         <div>
           <h2 className="text-3xl font-semibold text-gray-800  text-center">
-            💰 Salary Details
+             Salary Details
           </h2>
         </div>
         <div className="mt-8 flex justify-center">

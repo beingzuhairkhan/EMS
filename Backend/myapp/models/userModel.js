@@ -36,7 +36,7 @@ const userSchema = new mongoose.Schema({
   }
 }, { timestamps: true });
 
-// Hash password before saving
+
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) {
     return next();
@@ -55,11 +55,10 @@ userSchema.methods.comparePassword = async function (candidatePassword) {
   try {
     return await argon2.verify(this.password, candidatePassword);
   } catch (error) {
-    throw error;  // ✅ Directly throw the error instead of wrapping it
+    throw error;  
   }
 };
 
-// Generate Access Token
 userSchema.methods.generateAccessToken = function () {
   return jwt.sign(
     {
@@ -69,11 +68,11 @@ userSchema.methods.generateAccessToken = function () {
       role: this.role
     },
     process.env.ACCESS_TOKEN_SECRET,
-    { expiresIn: process.env.ACCESS_TOKEN_EXPIRY || "15m" } // ✅ Ensure a default expiry
+    { expiresIn: process.env.ACCESS_TOKEN_EXPIRY || "15m" }
   );
 };
 
-// Generate Refresh Token
+
 userSchema.methods.generateRefreshToken = function () {
   return jwt.sign(
     {
@@ -83,7 +82,7 @@ userSchema.methods.generateRefreshToken = function () {
       role: this.role
     },
     process.env.REFRESH_TOKEN_SECRET,
-    { expiresIn: process.env.REFRESH_TOKEN_EXPIRY || "7d" } // ✅ Ensure a default expiry
+    { expiresIn: process.env.REFRESH_TOKEN_EXPIRY || "7d" } 
   );
 };
 

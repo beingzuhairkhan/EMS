@@ -9,12 +9,10 @@ const ChangePassword = () => {
     confirmPassword: "",
   });
 
-  // ✅ Handle input change
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // ✅ Handle form submission with validation
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -36,7 +34,7 @@ const ChangePassword = () => {
 
       toast.success(response.data.message || "Password changed successfully!");
 
-      // ✅ Reset form
+ 
       setFormData({ oldPassword: "", newPassword: "", confirmPassword: "" });
     } catch (error) {
       console.error("Error changing password:", error);
@@ -49,7 +47,7 @@ const ChangePassword = () => {
       <h2 className="text-2xl font-semibold mb-4 text-gray-800">Change Password</h2>
 
       <form onSubmit={handleSubmit} className="grid gap-4">
-        {/* Old Password */}
+      
         <div className="flex flex-col">
           <label className="text-gray-600 font-medium mb-1">Old Password</label>
           <input
@@ -62,7 +60,7 @@ const ChangePassword = () => {
           />
         </div>
 
-        {/* New Password */}
+    
         <div className="flex flex-col">
           <label className="text-gray-600 font-medium mb-1">New Password</label>
           <input
@@ -75,7 +73,7 @@ const ChangePassword = () => {
           />
         </div>
 
-        {/* Confirm Password */}
+     
         <div className="flex flex-col">
           <label className="text-gray-600 font-medium mb-1">Confirm Password</label>
           <input
@@ -88,7 +86,7 @@ const ChangePassword = () => {
           />
         </div>
 
-        {/* Submit Button */}
+       
         <button
           type="submit"
           className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition shadow-md text-lg"

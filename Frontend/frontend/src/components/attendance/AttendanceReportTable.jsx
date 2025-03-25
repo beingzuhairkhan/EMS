@@ -3,13 +3,13 @@ import axiosInstance from "../../../src/context/axiosInstance";
 import toast from "react-hot-toast";
 
 const AttendanceReportTable = () => {
-  const [month, setMonth] = useState(new Date().toISOString().slice(0, 7)); // Default: Current Month (YYYY-MM)
+  const [month, setMonth] = useState(new Date().toISOString().slice(0, 7));
   const [attendanceRecords, setAttendanceRecords] = useState([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  // ✅ Fetch Attendance Records
+
   useEffect(() => {
     fetchAttendanceRecords(1, true);
   }, [month]);
@@ -18,7 +18,7 @@ const AttendanceReportTable = () => {
     setLoading(true);
     try {
       const response = await axiosInstance.get(`/attendance/report`, {
-        params: { month, page: pageNumber, limit: 10 }, // Pagination
+        params: { month, page: pageNumber, limit: 10 }, 
       });
       console.log("Resport" , response)
 
@@ -47,7 +47,7 @@ const AttendanceReportTable = () => {
 
   return (
     <div className="p-6 rounded-lg bg-white ">
-      {/* 🔹 Filter by Month */}
+   
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-semibold">Attendance Report</h2>
         <input
@@ -58,7 +58,7 @@ const AttendanceReportTable = () => {
         />
       </div>
 
-      {/* 🔹 Attendance Table */}
+    
       <div className="overflow-x-auto rounded-t-xl">
         <table className="w-full border-collapse border border-gray-300">
           <thead>
@@ -102,7 +102,7 @@ const AttendanceReportTable = () => {
         </table>
       </div>
 
-      {/* 🔹 Load More Button */}
+   
       {attendanceRecords.length > 0 && page < totalPages && (
         <div className="mt-6 text-center">
           <button

@@ -15,13 +15,13 @@ const departmentSchema = new mongoose.Schema({
 
 departmentSchema.pre("deleteOne", { document: true, query: false }, async function (next) {
     try {
-      // 🔹 Find employees under this department
+   
       const employees = await Employee.find({ department: this._id });
   
       if (employees.length > 0) {
         const empIds = employees.map((emp) => emp._id);
   
-        // 🔹 Delete related employees, leaves, and salaries
+      
         await Employee.deleteMany({ department: this._id });
         await Leave.deleteMany({ employeeId: { $in: empIds } });
         await Salary.deleteMany({ employeeId: { $in: empIds } });

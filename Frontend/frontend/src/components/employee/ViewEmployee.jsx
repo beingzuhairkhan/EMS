@@ -33,7 +33,7 @@ const ViewEmployee = () => {
             <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Employee Details</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {/* Left Side: Employee Image */}
+                
                 <div className="flex justify-center items-center">
                     <img 
                         src={employee?.userId.image || "https://via.placeholder.com/150"} 
@@ -42,7 +42,7 @@ const ViewEmployee = () => {
                     />
                 </div>
 
-                {/* Right Side: Employee Details */}
+               
                 <div className="md:col-span-2">
                     <div className="grid grid-cols-2 gap-4">
                         <div>
@@ -65,7 +65,7 @@ const ViewEmployee = () => {
                 </div>
             </div>
 
-            {/* Back Button */}
+         
             <div className="mt-8 flex justify-center">
                 <button 
                     onClick={() => navigate(-1)} 

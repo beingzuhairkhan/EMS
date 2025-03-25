@@ -81,7 +81,7 @@ const AddEmployee = () => {
             const newFormData = new FormData();
             Object.keys(formData).forEach((key) => {
                 if (key === "image" && formData.image) {
-                    newFormData.append("image", formData.image); // ✅ Append Image
+                    newFormData.append("image", formData.image);
                 } else {
                     newFormData.append(key, formData[key]);
                 }
@@ -89,12 +89,12 @@ const AddEmployee = () => {
     
             if (editId) {
                 await axiosInstance.patch(`employee/${editId}`, newFormData, {
-                    headers: { "Content-Type": "multipart/form-data" }, // ✅ Ensure multipart/form-data
+                    headers: { "Content-Type": "multipart/form-data" }, 
                 });
                 toast.success("Employee updated successfully");
             } else {
                 await axiosInstance.post("employee/addEmployee", newFormData, {
-                    headers: { "Content-Type": "multipart/form-data" }, // ✅ Correct Header
+                    headers: { "Content-Type": "multipart/form-data" }, 
                 });
                 toast.success("Employee added successfully");
             }
@@ -145,7 +145,7 @@ const AddEmployee = () => {
 
     return (
         <div>
-            {/* Search & Add Button */}
+          
             <div className="flex justify-between items-center mb-6">
                 <input
                     type="text"
@@ -159,7 +159,6 @@ const AddEmployee = () => {
                 </button>
             </div>
 
-            {/* Add Employee Form */}
             {showForm && (
                 <div className="bg-white p-6 rounded-lg shadow-lg mb-6 border border-gray-200">
                     <h3 className="text-lg font-semibold mb-4">Add New Employee</h3>
@@ -202,7 +201,6 @@ const AddEmployee = () => {
                 </div>
             )}
 
-            {/* Employee Table */}
             <EmployeeTable allEmployee={filteredData } handleEdit={handleEdit} />
         </div>
     );

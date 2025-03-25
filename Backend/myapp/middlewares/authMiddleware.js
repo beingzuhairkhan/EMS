@@ -4,7 +4,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 
 export const verifyJWT = asyncHandler(async (req, res, next) => {
     try {
-        // ✅ Extract token from cookies or Authorization header
+      
         const token = req.cookies?.accessToken || req.header("Authorization")?.split(" ")[1];
 
         //console.log("Token received:", token);
@@ -24,7 +24,7 @@ export const verifyJWT = asyncHandler(async (req, res, next) => {
             return res.status(404).json({ success: false, message: "User not found" });
         }
 
-        req.user = user; // ✅ Attach user to request
+        req.user = user; 
         next();
     } catch (error) {
         console.error("JWT Verification Error:", error.message);

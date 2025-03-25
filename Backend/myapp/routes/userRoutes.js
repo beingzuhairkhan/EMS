@@ -9,9 +9,7 @@ router.post('/login', loginUser );
 router.get('/verify', verifyJWT , verify);
 router.post('/logout', verifyJWT, logoutUser );
 router.post('/changePassword', verifyJWT, changeCurrentPassword );
-// router.get('/users/:id', getUserById);
-// router.put('/users/:id', updateUser);
-// router.delete('/users/:id', deleteUser);
+
 
 
 

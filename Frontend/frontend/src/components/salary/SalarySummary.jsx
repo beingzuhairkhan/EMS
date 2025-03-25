@@ -19,7 +19,6 @@ const SalarySummary = () => {
     fetchDepartments();
   }, []);
 
-  // ✅ Fetch all departments
   const fetchDepartments = async () => {
     try {
       const response = await axiosInstance.get("/department/all");
@@ -32,7 +31,6 @@ const SalarySummary = () => {
     }
   };
 
-  // ✅ Fetch employees based on selected department
   const fetchEmployeesByDepartment = async (departmentId) => {
     try {
       const response = await axiosInstance.get(`/employee/department/${departmentId}`);
@@ -50,11 +48,11 @@ const SalarySummary = () => {
 
     if (e.target.name === "department") {
       fetchEmployeesByDepartment(e.target.value);
-      setFormData((prev) => ({ ...prev, employee: "" })); // Reset employee field
+      setFormData((prev) => ({ ...prev, employee: "" }));
     }
   };
 
-  // ✅ Handle Submit - Add Salary
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -78,7 +76,7 @@ const SalarySummary = () => {
     <div className="p-6 bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-semibold mb-4">Salary Summary</h2>
       <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
-        {/* Department Dropdown */}
+    
         <select
           name="department"
           value={formData.department}
@@ -92,7 +90,7 @@ const SalarySummary = () => {
           ))}
         </select>
 
-        {/* Employee Dropdown (Based on Selected Department) */}
+       
         <select
           name="employee"
           value={formData.employee}
@@ -107,7 +105,7 @@ const SalarySummary = () => {
           ))}
         </select>
 
-        {/* Basic Salary */}
+       
         <input
           type="number"
           name="basicSalary"
@@ -118,7 +116,7 @@ const SalarySummary = () => {
           required
         />
 
-        {/* Allowances */}
+        
         <input
           type="number"
           name="allowances"
@@ -128,7 +126,7 @@ const SalarySummary = () => {
           className="p-2 border border-gray-300 rounded-lg"
         />
 
-        {/* Deductions */}
+     
         <input
           type="number"
           name="deductions"
@@ -138,7 +136,7 @@ const SalarySummary = () => {
           className="p-2 border border-gray-300 rounded-lg"
         />
 
-        {/* Pay Date */}
+        
         <input
           type="date"
           name="payDate"
@@ -148,11 +146,7 @@ const SalarySummary = () => {
           required
         />
 
-        {/* Month */}
-    
-
-
-        {/* Submit Button */}
+       
         <button
           type="submit"
           className="col-span-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"

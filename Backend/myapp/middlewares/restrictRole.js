@@ -10,13 +10,12 @@ export const restrict = asyncHandler(async (req, res, next) => {
         const userId = req.user._id;
         console.log("User ID:", userId);
 
-        // Fetch user details
+       
         const user = await User.findById(userId);
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        // Check if the user is an admin
         if (user.role !== "admin") {
             return res.status(403).json({ message: 'Unauthorized to access this route' });
         }

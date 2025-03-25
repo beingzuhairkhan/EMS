@@ -15,7 +15,6 @@ const EmployeeTable = ({ allEmployee, setAllEmployee, handleEdit }) => {
     try {
       await axiosInstance.delete(`/employee/${id}`);
       
-      // Update state after deletion
       setAllEmployee((prevEmployees) => prevEmployees.filter(emp => emp._id !== id));
 
       toast.success("Employee deleted successfully!");
@@ -42,10 +41,10 @@ const EmployeeTable = ({ allEmployee, setAllEmployee, handleEdit }) => {
         <tbody className="divide-y divide-gray-200">
           {allEmployee?.map((emp, index) => (
             <tr key={emp._id} className="hover:bg-gray-100 transition">
-              {/* Sr No */}
+              
               <td className="py-4 px-6 font-medium text-gray-700">{index + 1}</td>
 
-              {/* Employee Image */}
+           
               <td className="py-4 px-6">
                 <img
                   src={emp.userId?.image || "https://via.placeholder.com/50"}
@@ -54,16 +53,16 @@ const EmployeeTable = ({ allEmployee, setAllEmployee, handleEdit }) => {
                 />
               </td>
 
-              {/* Employee Name */}
+             
               <td className="py-4 px-6 text-gray-700">{emp.userId?.name || "N/A"}</td>
 
-              {/* Employee Email */}
+            
               <td className="py-4 px-6 text-gray-700">{emp.userId?.email || "N/A"}</td>
 
-              {/* Department Name */}
+             
               <td className="py-4 px-6 text-gray-700">{emp.department?.name || "N/A"}</td>
 
-              {/* Actions */}
+              
               <td className="py-4 px-6 flex gap-3">
                 <button
                   onClick={() => navigate(`/admin/departments/employee/${emp._id}`)}

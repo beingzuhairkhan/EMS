@@ -13,11 +13,11 @@ const salarySchema = new mongoose.Schema(
     },
     allowances: {
       type: Number,
-      default: 0, // Default to 0 if no allowances are provided
+      default: 0,
     },
     deductions: {
       type: Number,
-      default: 0, // Default to 0 if no deductions are provided
+      default: 0, 
     },
     netSalary: {
       type: Number,
@@ -31,7 +31,7 @@ const salarySchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Middleware to calculate net salary before saving
+
 salarySchema.pre('save', function (next) {
   this.netSalary = this.basicSalary + this.allowances - this.deductions;
   next();

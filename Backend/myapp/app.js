@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: "http://localhost:5173", // Your frontend URL
+    origin: "https://ems-flame-two.vercel.app",
     credentials: true,  
     allowedHeaders: ["Content-Type", "Authorization"],
   })
